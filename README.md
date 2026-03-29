@@ -37,21 +37,21 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  SEASON STATS   │  K/D · Wins · Kills · Avg DMG · Top 10%      │
-│                 │  Headshots · Assists · Distance · Longest Kill │
+│  SEASON STATS   │  K/D · Wins · Kills · Avg DMG · Top 10%       │
+│                 │  Headshots · Assists · Distance · Longest Kill│
 ├─────────────────────────────────────────────────────────────────┤
-│  LAST 3 MATCHES │  Placement · Kills · DMG · Assists · Survival  │
-│                 │  Headshots · Knocks · Map · Date · Duration    │
+│  LAST 3 MATCHES │  Placement · Kills · DMG · Assists · Survival │
+│                 │  Headshots · Knocks · Map · Date · Duration   │
 ├─────────────────────────────────────────────────────────────────┤
-│  LIFETIME       │  Longest Kill Ever · Max DMG/Match             │
-│  BEST-OF        │  Kill Streak Record · Longest Survival         │
-│                 │  Total HS · Total Kills/Wins/Matches/Distance  │
+│  LIFETIME       │  Longest Kill Ever · Max DMG/Match            │
+│  BEST-OF        │  Kill Streak Record · Longest Survival        │
+│                 │  Total HS · Total Kills/Wins/Matches/Distance │
 ├─────────────────────────────────────────────────────────────────┤
-│  OVERLAY MODE   │  Compact always-on-top widget · bottom-right   │
-│                 │  Perfect for gaming or streaming               │
+│  OVERLAY MODE   │  Compact always-on-top widget · bottom-right  │
+│                 │  Perfect for gaming or streaming              │
 ├─────────────────────────────────────────────────────────────────┤
-│  SYSTEM TRAY    │  Closes to tray · minimal RAM · no clutter     │
-│  AUTO-REFRESH   │  Updates stats every 3 minutes automatically   │
+│  SYSTEM TRAY    │  Closes to tray · minimal RAM · no clutter    │
+│  AUTO-REFRESH   │  Updates stats every 3 minutes automatically  │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -182,21 +182,21 @@ MIT — use it, fork it, modify it, do whatever you want.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  SEASON STATS   │  K/D · Wins · Kills · Ø DMG · Top 10%        │
-│                 │  Headshots · Assists · Distanz · Längst. Kill  │
+│  SEASON STATS   │  K/D · Wins · Kills · Ø DMG · Top 10%         │
+│                 │  Headshots · Assists · Distanz · Längst. Kill │
 ├─────────────────────────────────────────────────────────────────┤
 │  LETZTE 3       │  Platzierung · Kills · DMG · Assists · Zeit   │
 │  MATCHES        │  Headshots · Knocks · Map · Datum · Dauer     │
 ├─────────────────────────────────────────────────────────────────┤
-│  LIFETIME       │  Längster Kill Ever · Max DMG/Match            │
-│  BEST-OF        │  Kill Streak Rekord · Längste Überlebenszeit   │
+│  LIFETIME       │  Längster Kill Ever · Max DMG/Match           │
+│  BEST-OF        │  Kill Streak Rekord · Längste Überlebenszeit  │
 │                 │  Ges. HS · Ges. Kills/Wins/Matches/Distanz    │
 ├─────────────────────────────────────────────────────────────────┤
-│  OVERLAY-MODUS  │  Kompaktes Always-on-top Widget · rechts unten │
-│                 │  Perfekt zum Spielen oder Streamen             │
+│  OVERLAY-MODUS  │  Kompaktes Always-on-top Widget · rechts unten│
+│                 │  Perfekt zum Spielen oder Streamen            │
 ├─────────────────────────────────────────────────────────────────┤
-│  SYSTEM-TRAY    │  Schließt in Tray · minimaler RAM · kein Müll  │
-│  AUTO-REFRESH   │  Aktualisiert Stats alle 3 Minuten             │
+│  SYSTEM-TRAY    │  Schließt in Tray · minimaler RAM · kein Müll │
+│  AUTO-REFRESH   │  Aktualisiert Stats alle 3 Minuten            │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
