@@ -26,7 +26,7 @@
 
 <table><tr><td>
 
-> **PUBG/DSO** is a lightweight native desktop application for displaying your PUBG stats in real time.  
+> **PUBG/OVL** is a lightweight native desktop application for displaying your PUBG stats in real time.  
 > No browser tab, no memory overhead — just your stats, always available.
 
 </td></tr></table>
@@ -37,21 +37,21 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  SEASON STATS   │  K/D · Wins · Kills · Avg DMG · Top 10%       │
-│                 │  Headshots · Assists · Distance · Longest Kill│
+│  SEASON STATS   │  K/D · Wins · Kills · Avg DMG · Top 10%      │
+│                 │  Headshots · Assists · Distance · Longest Kill │
 ├─────────────────────────────────────────────────────────────────┤
-│  LAST 3 MATCHES │  Placement · Kills · DMG · Assists · Survival │
-│                 │  Headshots · Knocks · Map · Date · Duration   │
+│  LAST 3 MATCHES │  Placement · Kills · DMG · Assists · Survival  │
+│                 │  Headshots · Knocks · Map · Date · Duration    │
 ├─────────────────────────────────────────────────────────────────┤
-│  LIFETIME       │  Longest Kill Ever · Max DMG/Match            │
-│  BEST-OF        │  Kill Streak Record · Longest Survival        │
-│                 │  Total HS · Total Kills/Wins/Matches/Distance │
+│  LIFETIME       │  Longest Kill Ever · Max DMG/Match             │
+│  BEST-OF        │  Kill Streak Record · Longest Survival         │
+│                 │  Total HS · Total Kills/Wins/Matches/Distance  │
 ├─────────────────────────────────────────────────────────────────┤
-│  OVERLAY MODE   │  Compact always-on-top widget · bottom-right  │
-│                 │  Perfect for gaming or streaming              │
+│  OVERLAY MODE   │  Compact always-on-top widget · bottom-right   │
+│                 │  Perfect for gaming or streaming               │
 ├─────────────────────────────────────────────────────────────────┤
-│  SYSTEM TRAY    │  Closes to tray · minimal RAM · no clutter    │
-│  AUTO-REFRESH   │  Updates stats every 3 minutes automatically  │
+│  SYSTEM TRAY    │  Closes to tray · minimal RAM · no clutter     │
+│  AUTO-REFRESH   │  Updates stats every 3 minutes automatically   │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -133,11 +133,22 @@ build.bat
 
 Output: `dist\pubg-overlay-win32-x64\pubg-overlay.exe`
 
+### ◈ API RATE LIMIT
+
+The free PUBG API key is limited to **10 requests per minute**.  
+Each full refresh uses up to 7 calls — well within the limit at the default 3-minute auto-refresh.
+
+```
+Avoid hitting the limit by not:
+  · rapidly switching modes and manually refreshing each time
+  · running multiple instances simultaneously
+```
+
+> If you see `HTTP 429` — just wait a minute.
+
 <br>
 
 ### ◈ TECH STACK
-
-| Component | Details |
 |-----------|---------|
 | Runtime | Electron v31 |
 | Packager | electron-packager |
@@ -160,7 +171,7 @@ MIT — use it, fork it, modify it, do whatever you want.
 
 <table><tr><td>
 
-> **PUBG/DSO** ist eine schlanke native Desktop-App zur Anzeige deiner PUBG-Stats in Echtzeit.  
+> **PUBG/OVL** ist eine schlanke native Desktop-App zur Anzeige deiner PUBG-Stats in Echtzeit.  
 > Kein Browser-Tab, kein RAM-Overhead — nur deine Stats, immer verfügbar.
 
 </td></tr></table>
@@ -171,21 +182,21 @@ MIT — use it, fork it, modify it, do whatever you want.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  SEASON STATS   │  K/D · Wins · Kills · Ø DMG · Top 10%         │
-│                 │  Headshots · Assists · Distanz · Längst. Kill │
+│  SEASON STATS   │  K/D · Wins · Kills · Ø DMG · Top 10%        │
+│                 │  Headshots · Assists · Distanz · Längst. Kill  │
 ├─────────────────────────────────────────────────────────────────┤
 │  LETZTE 3       │  Platzierung · Kills · DMG · Assists · Zeit   │
 │  MATCHES        │  Headshots · Knocks · Map · Datum · Dauer     │
 ├─────────────────────────────────────────────────────────────────┤
-│  LIFETIME       │  Längster Kill Ever · Max DMG/Match           │
-│  BEST-OF        │  Kill Streak Rekord · Längste Überlebenszeit  │
+│  LIFETIME       │  Längster Kill Ever · Max DMG/Match            │
+│  BEST-OF        │  Kill Streak Rekord · Längste Überlebenszeit   │
 │                 │  Ges. HS · Ges. Kills/Wins/Matches/Distanz    │
 ├─────────────────────────────────────────────────────────────────┤
-│  OVERLAY-MODUS  │  Kompaktes Always-on-top Widget · rechts unten│
-│                 │  Perfekt zum Spielen oder Streamen            │
+│  OVERLAY-MODUS  │  Kompaktes Always-on-top Widget · rechts unten │
+│                 │  Perfekt zum Spielen oder Streamen             │
 ├─────────────────────────────────────────────────────────────────┤
-│  SYSTEM-TRAY    │  Schließt in Tray · minimaler RAM · kein Müll │
-│  AUTO-REFRESH   │  Aktualisiert Stats alle 3 Minuten            │
+│  SYSTEM-TRAY    │  Schließt in Tray · minimaler RAM · kein Müll  │
+│  AUTO-REFRESH   │  Aktualisiert Stats alle 3 Minuten             │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -267,11 +278,22 @@ build.bat
 
 Ausgabe: `dist\pubg-overlay-win32-x64\pubg-overlay.exe`
 
+### ◈ API RATE LIMIT
+
+Der kostenlose PUBG API Key ist auf **10 Anfragen pro Minute** limitiert.  
+Ein vollständiger Refresh verbraucht bis zu 7 Calls — beim Standard-Auto-Refresh alle 3 Minuten kein Problem.
+
+```
+Limit-Fehler vermeiden:
+  · Nicht schnell zwischen Modi wechseln und jedes Mal manuell refreshen
+  · Nicht mehrere App-Instanzen gleichzeitig laufen lassen
+```
+
+> Bei `HTTP 429` einfach eine Minute warten.
+
 <br>
 
 ### ◈ TECH STACK
-
-| Komponente | Details |
 |------------|---------|
 | Runtime | Electron v31 |
 | Packager | electron-packager |
