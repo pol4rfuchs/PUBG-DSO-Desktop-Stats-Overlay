@@ -1,6 +1,6 @@
 # PUBG/OVL — Desktop Stats Overlay
 
-> 🇬🇧 [English](#english) · 🇦🇹 [Deutsch](#deutsch)
+> 🇬🇧 [English](#english) · 🇦🇹/DE [Deutsch](#deutsch)
 
 ---
 
