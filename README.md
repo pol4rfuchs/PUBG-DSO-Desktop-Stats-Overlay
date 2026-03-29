@@ -1,15 +1,6 @@
 <div align="center">
 
-```
- ██████╗ ██╗   ██╗██████╗  ██████╗       ██████╗ ██╗   ██╗██╗
- ██╔══██╗██║   ██║██╔══██╗██╔════╝      ██╔═══██╗██║   ██║██║
- ██████╔╝██║   ██║██████╔╝██║  ███╗     ██║   ██║██║   ██║██║
- ██╔═══╝ ██║   ██║██╔══██╗██║   ██║     ██║   ██║╚██╗ ██╔╝██║
-   ██║     ╚██████╔╝██████╔╝╚██████╔╝██╗  ╚██████╔╝ ╚████╔╝ ███████╗
-   ╚═╝      ╚═════╝ ╚═════╝  ╚═════╝╚═╝   ╚═════╝   ╚═══╝  ╚══════╝
-```
-
-**DESKTOP STATS OVERLAY**
+![PUBG/OVL](assets/logo.svg)
 
 [![Download](https://img.shields.io/badge/⬇_DOWNLOAD-LATEST_RELEASE-e0a220?style=for-the-badge&labelColor=0c0d0a&color=e0a220)](../../releases)
 [![Platform](https://img.shields.io/badge/WINDOWS-x64_ONLY-0a1628?style=for-the-badge&labelColor=0c0d0a)](../../releases)
