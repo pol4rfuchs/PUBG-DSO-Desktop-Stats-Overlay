@@ -1,0 +1,14 @@
+{
+  "name": "pubg-overlay",
+  "version": "1.0.0",
+  "description": "PUBG Stats Overlay",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager . pubg-overlay --platform=win32 --arch=x64 --out=dist --overwrite --no-prune --ignore=dist"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-packager": "^17.1.2"
+  }
+}
