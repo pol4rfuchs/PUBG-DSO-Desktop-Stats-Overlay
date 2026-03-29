@@ -160,7 +160,7 @@ MIT — use it, fork it, modify it, do whatever you want.
 
 <table><tr><td>
 
-> **PUBG/OVL** ist eine schlanke native Desktop-App zur Anzeige deiner PUBG-Stats in Echtzeit.  
+> **PUBG/DSO** ist eine schlanke native Desktop-App zur Anzeige deiner PUBG-Stats in Echtzeit.  
 > Kein Browser-Tab, kein RAM-Overhead — nur deine Stats, immer verfügbar.
 
 </td></tr></table>
