@@ -26,7 +26,7 @@
 
 <table><tr><td>
 
-> **PUBG/OVL** is a lightweight native desktop application for displaying your PUBG stats in real time.  
+> **PUBG/DSO** is a lightweight native desktop application for displaying your PUBG stats in real time.  
 > No browser tab, no memory overhead — just your stats, always available.
 
 </td></tr></table>
