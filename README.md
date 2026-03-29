@@ -1,6 +1,6 @@
 # PUBG/OVL — Desktop Stats Overlay
 
-> 🇬🇧 [English](#english) · 🇦🇹/DE [Deutsch](#deutsch)
+> ![EN](https://img.shields.io/badge/EN-🇬🇧-blue) · ![DE](https://img.shields.io/badge/DE--AT-🇦🇹-red)
 
 ---
 
