@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 110" width="640" height="110">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1a1c12"/>
+      <stop offset="40%" stop-color="#0e0f0b"/>
+      <stop offset="100%" stop-color="#070808"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffe566"/>
+      <stop offset="50%" stop-color="#e0a220"/>
+      <stop offset="100%" stop-color="#a06808"/>
+    </linearGradient>
+    <linearGradient id="silver" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#d8d4c8"/>
+      <stop offset="100%" stop-color="#908878"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e0a220" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#e0a220" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#e0a220" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e0a220" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#e0a220" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="640" height="110" fill="url(#bg)"/>
+
+  <!-- Subtle glow band -->
+  <rect x="0" y="20" width="640" height="70" fill="url(#glow)"/>
+
+  <!-- Top border gold -->
+  <rect x="0" y="0" width="640" height="2" fill="url(#gold)"/>
+
+  <!-- Diagonal slice decoration left -->
+  <polygon points="0,0 80,0 0,110" fill="#e0a220" opacity="0.07"/>
+  <polygon points="0,0 6,0 0,18" fill="#e0a220" opacity="0.6"/>
+
+  <!-- Diagonal slice decoration right -->
+  <polygon points="640,0 640,110 560,110" fill="#e0a220" opacity="0.05"/>
+  <polygon points="634,110 640,110 640,92" fill="#e0a220" opacity="0.4"/>
+
+  <!-- Crosshair decoration -->
+  <line x1="595" y1="20" x2="625" y2="20" stroke="#e0a220" stroke-width="1" opacity="0.5"/>
+  <line x1="610" y1="8" x2="610" y2="32" stroke="#e0a220" stroke-width="1" opacity="0.5"/>
+  <circle cx="610" cy="20" r="5" fill="none" stroke="#e0a220" stroke-width="1" opacity="0.5"/>
+  <circle cx="610" cy="20" r="1.5" fill="#e0a220" opacity="0.6"/>
+
+  <!-- Vertical gold bar left -->
+  <rect x="18" y="10" width="3" height="90" fill="url(#gold)"/>
+  <!-- Glow behind bar -->
+  <rect x="14" y="10" width="10" height="90" fill="#e0a220" opacity="0.08" filter="url(#blur)"/>
+
+  <!-- PUBG — main text -->
+  <text x="36" y="75"
+    font-family="Impact, 'Arial Black', sans-serif"
+    font-size="70"
+    letter-spacing="2"
+    fill="url(#gold)">PUBG</text>
+
+  <!-- PUBG shadow/depth -->
+  <text x="38" y="77"
+    font-family="Impact, 'Arial Black', sans-serif"
+    font-size="70"
+    letter-spacing="2"
+    fill="#000" opacity="0.3">PUBG</text>
+  <text x="36" y="75"
+    font-family="Impact, 'Arial Black', sans-serif"
+    font-size="70"
+    letter-spacing="2"
+    fill="url(#gold)">PUBG</text>
+
+  <!-- Divider slash area -->
+  <rect x="238" y="12" width="1" height="86" fill="#e0a220" opacity="0.2"/>
+  <text x="248" y="70"
+    font-family="Impact, sans-serif"
+    font-size="40"
+    fill="#3a3828" opacity="0.9">/</text>
+
+  <!-- DSO text -->
+  <text x="268" y="75"
+    font-family="Impact, 'Arial Black', sans-serif"
+    font-size="70"
+    letter-spacing="2"
+    fill="url(#silver)">DSO</text>
+
+  <!-- Tagline -->
+  <text x="36" y="98"
+    font-family="'Courier New', monospace"
+    font-size="10"
+    letter-spacing="7"
+    fill="#6a6050">DESKTOP STATS OVERLAY</text>
+
+  <!-- Bottom fade line -->
+  <rect x="18" y="107" width="400" height="1" fill="url(#fade)" opacity="0.5"/>
+
+  <!-- Bottom border -->
+  <rect x="0" y="108" width="640" height="2" fill="#e0a220" opacity="0.2"/>
+
+  <!-- Tactical dots row -->
+  <circle cx="500" cy="88" r="1.5" fill="#e0a220" opacity="0.5"/>
+  <circle cx="510" cy="88" r="1.5" fill="#e0a220" opacity="0.35"/>
+  <circle cx="520" cy="88" r="1.5" fill="#e0a220" opacity="0.2"/>
+</svg>
