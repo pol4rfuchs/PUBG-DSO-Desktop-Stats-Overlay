@@ -1,6 +1,6 @@
 <div align="center">
 
-![PUBG/DSO](https://codeberg.org/wuest3nfuchs/PUBG-DSO-Desktop-Stats-Overlay/raw/branch/main/pubg-electron/assets/logo.svg)
+![PUBG/DSO](https://raw.githubusercontent.com/Pol4rFuchs/PUBG-DSO-Desktop-Stats-Overlay/main/pubg-electron/assets/logo.svg)
 
 [![Download](https://img.shields.io/badge/⬇_DOWNLOAD-LATEST_RELEASE-e0a220?style=for-the-badge&labelColor=0c0d0a&color=e0a220)](../../releases)
 [![Platform](https://img.shields.io/badge/WINDOWS-x64_ONLY-0a1628?style=for-the-badge&labelColor=0c0d0a)](../../releases)
@@ -88,7 +88,7 @@ You need a **free** PUBG Developer API Key — takes about 2 minutes.
 1. Launch pubg-overlay.exe
 2. Click the  ⚙ Config  tab
 3. Paste your API Key
-4. Enter your player name  (e.g. Wuest3nFuchs)
+4. Enter your player name  (e.g. Pol4rFuchs)
 5. Select your platform    (Steam for PC)
 6. Click  ▶ Save & Load Stats
 ```
@@ -126,8 +126,8 @@ All Squad / Duo / Solo modes and their FPP variants are supported.
 **Requirement:** [Node.js LTS](https://nodejs.org) must be installed.
 
 ```bash
-git clone https://codeberg.org/wuest3nfuchs/pubg-overlay.git
-cd pubg-overlay
+git clone https://github.com/Pol4rFuchs/PUBG-DSO-Desktop-Stats-Overlay.git
+cd PUBG-DSO-Desktop-Stats-Overlay
 build.bat
 ```
 
@@ -233,7 +233,7 @@ Du brauchst einen **kostenlosen** PUBG Developer API Key — dauert ca. 2 Minute
 1. pubg-overlay.exe starten
 2. Tab  ⚙ Config  öffnen
 3. API Key einfügen
-4. Spielernamen eingeben  (z.B. Wuest3nFuchs)
+4. Spielernamen eingeben  (z.B. Pol4rFuchs)
 5. Plattform wählen       (Steam für PC)
 6. ▶ Save & Load Stats  klicken
 ```
@@ -271,8 +271,8 @@ Alle Squad / Duo / Solo Modi inklusive FPP-Varianten werden unterstützt.
 **Voraussetzung:** [Node.js LTS](https://nodejs.org) muss installiert sein.
 
 ```bash
-git clone https://codeberg.org/wuest3nfuchs/pubg-overlay.git
-cd pubg-overlay
+git clone https://github.com/Pol4rFuchs/PUBG-DSO-Desktop-Stats-Overlay.git
+cd PUBG-DSO-Desktop-Stats-Overlay
 build.bat
 ```
 
@@ -316,7 +316,7 @@ MIT — benutzen, forken, ändern, mach was du willst.
 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ```
 
-Built by [**wuest3nfuchs**](https://codeberg.org/wuest3nfuchs) &nbsp;·&nbsp; Uses the official PUBG API &nbsp;·&nbsp; Not affiliated with PUBG Corporation
+Built by [**Pol4rFuchs**](https://github.com/Pol4rFuchs) &nbsp;·&nbsp; Uses the official PUBG API &nbsp;·&nbsp; Not affiliated with PUBG Corporation
 
 ```
 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
