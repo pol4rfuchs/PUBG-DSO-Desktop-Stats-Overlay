@@ -14,7 +14,7 @@
 
 <div align="center">
 
-`🇬🇧` **[ENGLISH](#-english)** &nbsp;·&nbsp; `🇦🇹` **[DEUTSCH](#-deutsch)**
+ **[ENGLISH](#-english)** &nbsp;·&nbsp;  **[DEUTSCH](#-deutsch)**
 
 </div>
 
@@ -22,7 +22,7 @@
 
 <br>
 
-## 🇬🇧 ENGLISH
+## ENGLISH
 
 <table><tr><td>
 
@@ -167,7 +167,7 @@ MIT — use it, fork it, modify it, do whatever you want.
 
 <br>
 
-## 🇦🇹 DEUTSCH
+## DEUTSCH
 
 <table><tr><td>
 
