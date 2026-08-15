@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Security
+- Bumped Electron from `^31.0.0` to `^41.7.1`, resolving all previously flagged high-severity Electron CVEs (ASAR integrity bypass, multiple use-after-free issues, context isolation bypasses, and others — see prior `npm audit` output).
+- Known, currently unfixable: `extract-zip` (pulled in transitively by `electron-packager`, build-tooling only, not shipped in the built app) has an unpatched symlink path-traversal advisory ([GHSA-jmr9-qjv8-65gv](https://github.com/advisories/GHSA-jmr9-qjv8-65gv)) with no fixed release available upstream as of this writing. Re-check on future `electron-packager` updates.
 - Fixed reflected-content injection: PUBG API error bodies were inserted into the DOM via `innerHTML`/`outerHTML` without escaping; now escaped, and map/mode strings from the API are escaped defensively as well.
 - API key is no longer stored in renderer `localStorage`. Config is now persisted by the main process via Electron `safeStorage` (OS keychain-backed encryption at rest).
 - Tightened Content-Security-Policy: removed `'unsafe-inline'` from `script-src` (all inline `onclick=""` handlers moved to `addEventListener` in an external `app.js`); added `object-src 'none'` and `base-uri 'none'`.
