@@ -1,0 +1,101 @@
+name: Workflow Cleanup
+
+on:
+  schedule:
+    - cron: '0 4 1 * *'  # monthly, 1st at 04:00 UTC
+  workflow_dispatch:
+    inputs:
+      keep_minimum_runs:
+        description: 'Number of most recent runs to keep per workflow'
+        type: number
+        default: 10
+        required: true
+      days_old:
+        description: 'Delete runs older than this many days (0 = ignore age, only use keep_minimum_runs)'
+        type: number
+        default: 90
+        required: true
+      delete_workflow_pattern:
+        description: 'Only clean workflows whose filename contains this text (blank = all workflows)'
+        type: string
+        default: ''
+        required: false
+      dry_run:
+        description: 'Preview what would be deleted without actually deleting'
+        type: boolean
+        default: true
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete old workflow runs
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const keepMin = parseInt('${{ inputs.keep_minimum_runs || 10 }}', 10);
+            const daysOld = parseInt('${{ inputs.days_old || 90 }}', 10);
+            const pattern = '${{ inputs.delete_workflow_pattern || '' }}';
+            const dryRun = '${{ inputs.dry_run }}' !== 'false';
+            const cutoff = daysOld > 0 ? Date.now() - daysOld * 24 * 60 * 60 * 1000 : null;
+
+            const workflows = await github.paginate(
+              github.rest.actions.listRepoWorkflows,
+              { owner: context.repo.owner, repo: context.repo.repo }
+            );
+
+            let totalDeleted = 0;
+
+            for (const wf of workflows) {
+              if (pattern && !wf.path.includes(pattern)) continue;
+
+              const runs = await github.paginate(
+                github.rest.actions.listWorkflowRuns,
+                {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  workflow_id: wf.id,
+                  per_page: 100,
+                }
+              );
+
+              // newest first
+              runs.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+              const toDelete = runs.slice(keepMin).filter((run) => {
+                if (!cutoff) return true;
+                return new Date(run.created_at).getTime() < cutoff;
+              });
+
+              if (toDelete.length === 0) continue;
+
+              console.log(`\n${wf.name} (${wf.path}): ${runs.length} total runs, ${toDelete.length} eligible for deletion`);
+
+              for (const run of toDelete) {
+                if (dryRun) {
+                  console.log(`  [dry-run] would delete run ${run.id} (${run.created_at}, ${run.conclusion || run.status})`);
+                } else {
+                  try {
+                    await github.rest.actions.deleteWorkflowRun({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      run_id: run.id,
+                    });
+                    console.log(`  deleted run ${run.id} (${run.created_at})`);
+                    totalDeleted++;
+                  } catch (err) {
+                    console.log(`  failed to delete run ${run.id}: ${err.message}`);
+                  }
+                }
+              }
+            }
+
+            const summary = dryRun
+              ? `Dry run complete — no runs deleted. Re-run with dry_run=false to actually delete.`
+              : `Deleted ${totalDeleted} workflow run(s).`;
+            console.log(`\n${summary}`);
+            core.summary.addHeading('Workflow Cleanup').addRaw(summary).write();

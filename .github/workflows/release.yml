@@ -4,12 +4,73 @@ on:
   push:
     tags:
       - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g. v1.0.1) — a git tag will be created for this'
+        required: true
+        type: string
 
 permissions:
   contents: write
 
 jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.resolve.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve tag name
+        id: resolve
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ inputs.version }}"
+          else
+            TAG="${{ github.ref_name }}"
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Validate tag format (vX.Y.Z)
+        run: |
+          TAG="${{ steps.resolve.outputs.tag }}"
+          if ! [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::'$TAG' is not a valid version tag (expected vX.Y.Z)"
+            exit 1
+          fi
+
+      - name: Check tag doesn't already exist
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          TAG="${{ steps.resolve.outputs.tag }}"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "::error::Tag $TAG already exists"
+            exit 1
+          fi
+
+      - name: Warn if package.json version doesn't match tag
+        run: |
+          TAG="${{ steps.resolve.outputs.tag }}"
+          PKG_VERSION="v$(node -p "require('./pubg-electron/package.json').version")"
+          if [ "$PKG_VERSION" != "$TAG" ]; then
+            echo "::warning::package.json version ($PKG_VERSION) does not match release tag ($TAG) — consider bumping it"
+          fi
+
+      - name: Create and push tag
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          TAG="${{ steps.resolve.outputs.tag }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG" -m "Release $TAG"
+          git push origin "$TAG"
+
   build-and-release:
+    needs: preflight
     runs-on: windows-latest
     defaults:
       run:
@@ -17,6 +78,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.preflight.outputs.tag }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -28,15 +91,28 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: npm audit (high severity, non-blocking)
+        run: npm audit --audit-level=high
+        continue-on-error: true
+
       - name: Build Windows executable
         run: npx electron-packager . pubg-overlay --platform=win32 --arch=x64 --out=dist --overwrite --no-prune --ignore=dist
 
-      - name: Zip artifact
-        run: Compress-Archive -Path "dist\pubg-overlay-win32-x64\*" -DestinationPath "pubg-overlay-${{ github.ref_name }}-win32-x64.zip"
+      - name: Verify EXE exists
         shell: pwsh
+        run: |
+          if (!(Test-Path "dist\pubg-overlay-win32-x64\pubg-overlay.exe")) {
+            Write-Error "Build did not produce pubg-overlay.exe"
+            exit 1
+          }
+
+      - name: Zip artifact
+        shell: pwsh
+        run: Compress-Archive -Path "dist\pubg-overlay-win32-x64\*" -DestinationPath "pubg-overlay-${{ needs.preflight.outputs.tag }}-win32-x64.zip"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: pubg-electron/pubg-overlay-${{ github.ref_name }}-win32-x64.zip
+          tag_name: ${{ needs.preflight.outputs.tag }}
+          files: pubg-electron/pubg-overlay-${{ needs.preflight.outputs.tag }}-win32-x64.zip
           generate_release_notes: true

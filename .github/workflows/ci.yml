@@ -11,9 +11,59 @@ on:
     paths:
       - 'pubg-electron/**'
       - '.github/workflows/ci.yml'
+  workflow_dispatch:
+    inputs:
+      run_audit:
+        description: 'Run npm audit (dependency vulnerability scan)'
+        type: boolean
+        default: true
 
 jobs:
-  build-check:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pubg-electron
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check package.json is valid JSON
+        run: node -e "JSON.parse(require('fs').readFileSync('package.json','utf8'))"
+
+      - name: Check package-lock.json is valid JSON
+        run: node -e "JSON.parse(require('fs').readFileSync('package-lock.json','utf8'))"
+
+      - name: Check package.json / package-lock.json are in sync
+        run: |
+          PKG_NAME=$(node -p "require('./package.json').name")
+          LOCK_NAME=$(node -p "require('./package-lock.json').name")
+          if [ "$PKG_NAME" != "$LOCK_NAME" ]; then
+            echo "::error::package.json name ($PKG_NAME) and package-lock.json name ($LOCK_NAME) differ"
+            exit 1
+          fi
+
+      - name: Check for likely hardcoded secrets
+        run: |
+          if grep -RniE "(api[_-]?key|secret|token|password)\s*[:=]\s*['\"][A-Za-z0-9_\-]{12,}['\"]" \
+             --include="*.js" --include="*.html" . ; then
+            echo "::error::Possible hardcoded secret found — check the lines above"
+            exit 1
+          else
+            echo "No hardcoded secrets pattern found."
+          fi
+
+      - name: Check .gitignore covers node_modules and dist
+        run: |
+          for entry in "node_modules" "dist"; do
+            if ! grep -qx "${entry}/" .gitignore 2>/dev/null; then
+              echo "::error::.gitignore is missing '${entry}/'"
+              exit 1
+            fi
+          done
+
+  build:
+    needs: validate
     runs-on: windows-latest
     defaults:
       run:
@@ -32,13 +82,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: npm audit (high severity)
+        if: github.event_name != 'workflow_dispatch' || inputs.run_audit
+        run: npm audit --audit-level=high
+        continue-on-error: true
+
       - name: Package app (smoke build, not published)
         run: npx electron-packager . pubg-overlay --platform=win32 --arch=x64 --out=dist --overwrite --no-prune --ignore=dist
 
       - name: Verify EXE exists
+        shell: pwsh
         run: |
           if (!(Test-Path "dist\pubg-overlay-win32-x64\pubg-overlay.exe")) {
             Write-Error "Build did not produce pubg-overlay.exe"
             exit 1
           }
-        shell: pwsh
+          Write-Host "Build OK: $((Get-Item 'dist\pubg-overlay-win32-x64\pubg-overlay.exe').Length) bytes"
