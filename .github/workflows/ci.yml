@@ -26,7 +26,7 @@ jobs:
         working-directory: pubg-electron
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Check package.json is valid JSON
         run: node -e "JSON.parse(require('fs').readFileSync('package.json','utf8'))"
@@ -70,7 +70,7 @@ jobs:
         working-directory: pubg-electron
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
