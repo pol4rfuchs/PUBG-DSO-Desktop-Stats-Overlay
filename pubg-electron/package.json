@@ -8,7 +8,7 @@
     "build": "electron-packager . pubg-overlay --platform=win32 --arch=x64 --out=dist --overwrite --no-prune --ignore=dist"
   },
   "devDependencies": {
-    "electron": "^41.7.1",
+    "electron": "^43.4.0",
     "electron-packager": "^17.1.2"
   }
 }
