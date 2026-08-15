@@ -111,7 +111,7 @@ jobs:
         run: Compress-Archive -Path "dist\pubg-overlay-win32-x64\*" -DestinationPath "pubg-overlay-${{ needs.preflight.outputs.tag }}-win32-x64.zip"
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ needs.preflight.outputs.tag }}
           files: pubg-electron/pubg-overlay-${{ needs.preflight.outputs.tag }}-win32-x64.zip
