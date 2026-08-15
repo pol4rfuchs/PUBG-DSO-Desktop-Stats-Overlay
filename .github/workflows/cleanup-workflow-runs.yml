@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete old workflow runs
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const keepMin = parseInt('${{ inputs.keep_minimum_runs || 10 }}', 10);
