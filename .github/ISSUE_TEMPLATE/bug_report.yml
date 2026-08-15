@@ -1,0 +1,55 @@
+name: Bug Report
+description: Something in the overlay isn't working right
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report this — the more detail, the faster it gets fixed.
+
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      description: Shown in the titlebar ("STATS v2") or check the release you downloaded
+      placeholder: v1.0.1
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Windows version
+      options:
+        - Windows 11
+        - Windows 10
+        - Other / not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect, and what actually happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the Config tab
+        2. Enter API key and player name
+        3. ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error message or screenshot
+      description: Paste any error text the app showed you, or drag in a screenshot
+    validations:
+      required: false

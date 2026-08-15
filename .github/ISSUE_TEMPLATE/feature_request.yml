@@ -1,0 +1,20 @@
+name: Feature Request
+description: Suggest an idea for the overlay
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: What are you trying to do that the app doesn't support today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: How would you picture this working, if you have something in mind?
+    validations:
+      required: false

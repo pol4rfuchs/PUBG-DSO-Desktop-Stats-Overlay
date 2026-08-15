@@ -1,0 +1,73 @@
+name: Dependabot PR Labeler
+
+on:
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  label:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Apply labels and flag major bumps for manual review
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const updateType = "${{ steps.metadata.outputs.update-type }}";
+            const ecosystem   = "${{ steps.metadata.outputs.package-ecosystem }}";
+            const depName     = "${{ steps.metadata.outputs.dependency-names }}";
+
+            const labels = ['dependencies'];
+            if (updateType.includes('major')) labels.push('major-update');
+            else if (updateType.includes('minor')) labels.push('minor-update');
+            else if (updateType.includes('patch')) labels.push('patch-update');
+            if (ecosystem) labels.push(ecosystem);
+
+            const labelColors = {
+              'dependencies': 'ededed',
+              'major-update': 'd93f0b',
+              'minor-update': 'fbca04',
+              'patch-update': '0e8a16',
+              'npm': 'cc338b',
+              'github_actions': '2088ff',
+            };
+
+            for (const name of labels) {
+              try {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name,
+                  color: labelColors[name] || 'ededed',
+                });
+              } catch (err) {
+                // label already exists — fine
+              }
+            }
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels,
+            });
+
+            if (updateType.includes('major')) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `⚠️ **Major version bump** for \`${depName}\`.\n\nCI going green only means it *builds* — it doesn't confirm runtime behavior. Check the dependency's breaking-changes notes and, for Electron specifically, verify \`setWindowOpenHandler\`, \`safeStorage\`, and \`sandbox\` still behave as expected before merging.`,
+              });
+            }

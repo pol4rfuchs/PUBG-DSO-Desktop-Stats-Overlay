@@ -1,0 +1,38 @@
+version: 2
+
+updates:
+  # electron, electron-packager, and their transitive deps
+  - package-ecosystem: "npm"
+    directory: "/pubg-electron"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "npm"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    groups:
+      # Minor/patch bumps are usually safe and noisy — bundle them.
+      # Major bumps (e.g. electron 41 -> 42) are deliberately NOT grouped
+      # here so each one gets its own PR and its own manual compatibility
+      # check, the way the electron 31 -> 41 bump was handled.
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Versions pinned inside .github/workflows/*.yml (actions/checkout, etc.)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "chore"
+      include: "scope"

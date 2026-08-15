@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: PUBG Official API Docs
+    url: https://documentation.pubg.com
+    about: Questions about getting an API key, rate limits, or the PUBG API itself belong there, not here.
