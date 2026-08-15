@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'pubg-electron/**'
+      - '.github/workflows/ci.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'pubg-electron/**'
+      - '.github/workflows/ci.yml'
+
+jobs:
+  build-check:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: pubg-electron
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: pubg-electron/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Package app (smoke build, not published)
+        run: npx electron-packager . pubg-overlay --platform=win32 --arch=x64 --out=dist --overwrite --no-prune --ignore=dist
+
+      - name: Verify EXE exists
+        run: |
+          if (!(Test-Path "dist\pubg-overlay-win32-x64\pubg-overlay.exe")) {
+            Write-Error "Build did not produce pubg-overlay.exe"
+            exit 1
+          }
+        shell: pwsh
