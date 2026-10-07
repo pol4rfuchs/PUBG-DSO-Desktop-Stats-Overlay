@@ -1,6 +1,6 @@
 {
   "name": "pubg-overlay",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "PUBG Stats Overlay",
   "main": "main.js",
   "scripts": {
